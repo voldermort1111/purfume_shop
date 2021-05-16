@@ -1,0 +1,18 @@
+{
+	"type": "mysql",
+	"host": "localhost",
+	"port": 3306,
+	"username": "root",
+	"password": "kuriboh",
+	"database": "khanh",
+	"entities": ["dist/src/entities/*.entity.js"],
+	"migrationsTableName": "custom_migration_table",
+	"migrations": ["dist/src/migrations/*.js"],
+	"cli": {
+		"migrationsDir": "src/migrations",
+		"entitiesDir": "src/entities",
+		"subscribersDir": "src/subscribers"
+	},
+	"logging": true,
+	"synchronize": false
+}

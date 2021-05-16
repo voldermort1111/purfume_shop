@@ -1,0 +1,22 @@
+stages:
+ - DeployTest
+
+DeployTest:
+  stage: DeployTest
+  image: node:14.15-alpine
+  only:
+    - develop@event-livestream/livepeek-backend
+  script:
+    - apk add rsync && apk add openssh
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H '13.229.180.202'  >> ~/.ssh/known_hosts
+    - echo "$DEV_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo "$DEV_BACKEND_ENV" > .env.production
+    - echo "$DEV_ORMCONFIG" > ormconfig.json
+    - npm install
+    - npm run build
+    - rsync -avzh --exclude='.git' --exclude='node_modules' -e "ssh -i ~/.ssh/id_rsa " --rsync-path="sudo rsync" . ubuntu@13.229.180.202:/home/ubuntu/livepeek-backend
+    - ssh -i ~/.ssh/id_rsa ubuntu@13.229.180.202 "cd /home/ubuntu/livepeek-backend && pm2 restart all && sudo chown -R ubuntu:ubuntu ."
+
+
