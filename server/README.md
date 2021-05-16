@@ -1,4 +1,3 @@
-# LivePeek
 ## Nest Doc
 
 [Nest](https://docs.nestjs.com) framework TypeScript starter repository.
@@ -26,6 +25,7 @@ $ npm run start:prod
 ```
 
 ## Typeorm migration
+
 ```bash
 # create file
 $ npm run migration:create
