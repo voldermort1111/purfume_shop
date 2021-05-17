@@ -104,7 +104,7 @@ export default function Capacity() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         } else {
           updateCapacity(id, { value: +value, unit })
             .then(() => NotificationManager.success(`Sửa thành công!`))
@@ -115,7 +115,7 @@ export default function Capacity() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         }
         setFormDefaultValue(formDefault);
         setIsToggle(false);
@@ -133,7 +133,7 @@ export default function Capacity() {
             error.response.data?.message || error.message || "Đã xảy ra lỗi!"
           )
         )
-        .finally(() => setReload(!reload));
+        .finally(() => setReload(Date.now()));
     }
     setIdForRemove(null);
   };

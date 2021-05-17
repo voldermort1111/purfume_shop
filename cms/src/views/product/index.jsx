@@ -128,7 +128,7 @@ export default function Product() {
               error.response.data?.message || error.message || "Đã xảy ra lỗi!"
             )
           )
-          .finally(() => setReload(!reload));
+          .finally(() => setReload(Date.now()));
       } else {
         updateProduct(id, {
           name,
@@ -151,11 +151,12 @@ export default function Product() {
               error.response.data?.message || error.message || "Đã xảy ra lỗi!"
             )
           )
-          .finally(() => setReload(!reload));
+          .finally(() => setReload(Date.now()));
       }
       setFormDefaultValue(formDefault);
       setIsToggle(false);
-    }
+    },
+    [setReload, reload, setFormDefaultValue, setIsToggle]
   );
 
   const submitRemove = (value) => {
@@ -167,7 +168,7 @@ export default function Product() {
             error.response.data?.message || error.message || "Đã xảy ra lỗi!"
           )
         )
-        .finally(() => setReload(!reload));
+        .finally(() => setReload(Date.now()));
     }
     setIdForRemove(null);
   };

@@ -67,6 +67,7 @@ export const ProductDetailComment = ({ productId }) => {
 	const [evaluateTotal, setEvaluateTotal] = useState(0);
 	const [commentAction, setCommentAction] = useState(true);
 	const [canEvaluate, setcanEvaluate] = useState(false);
+	const [reloadEvaluate, setReloadEvaluate] = useState(null);
 
 	useEffect(() => {
 		if (productId) {
@@ -92,7 +93,7 @@ export const ProductDetailComment = ({ productId }) => {
 				setcanEvaluate(false);
 			}
 		}
-	}, [hasAuth, productId]);
+	}, [hasAuth, productId, reloadEvaluate]);
 
 	useEffect(() => {
 		if (productId) {
@@ -168,6 +169,7 @@ export const ProductDetailComment = ({ productId }) => {
 			.then(() => {
 				setCommentAction(!commentAction);
 				setHiddenAddComment(true);
+				setReloadEvaluate(Date.now());
 			})
 			.catch(error =>
 				notification.error({

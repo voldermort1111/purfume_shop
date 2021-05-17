@@ -100,7 +100,7 @@ export default function OdorRange() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         } else {
           updateOdorRange(id, { value })
             .then(() => NotificationManager.success(`Sửa thành công!`))
@@ -111,7 +111,7 @@ export default function OdorRange() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         }
         setFormDefaultValue(formDefault);
         setIsToggle(false);
@@ -129,7 +129,7 @@ export default function OdorRange() {
             error.response.data?.message || error.message || "Đã xảy ra lỗi!"
           )
         )
-        .finally(() => setReload(!reload));
+        .finally(() => setReload(Date.now()));
     }
     setIdForRemove(null);
   };

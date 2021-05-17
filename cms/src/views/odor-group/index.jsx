@@ -105,7 +105,7 @@ export default function OdorGroup() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         } else {
           updateOdorGroup(id, { value, name })
             .then(() => NotificationManager.success(`Sửa thành công!`))
@@ -116,7 +116,7 @@ export default function OdorGroup() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         }
         setFormDefaultValue(formDefault);
         setIsToggle(false);
@@ -134,7 +134,7 @@ export default function OdorGroup() {
             error.response.data?.message || error.message || "Đã xảy ra lỗi!"
           )
         )
-        .finally(() => setReload(!reload));
+        .finally(() => setReload(Date.now()));
     }
     setIdForRemove(null);
   };

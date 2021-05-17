@@ -30,7 +30,7 @@ export default function ProductImage({ isToggle, setIsToggle, id }) {
     uploadImage(event.target.files[0])
       .then((result) =>
         addImage(id, result.data.filename)
-          .then(() => setReload(!reload))
+          .then(() => setReload(Date.now()))
           .catch((error) =>
             NotificationManager.error(
               error.response.data?.message || error.message || "Đã xảy ra lỗi!"
@@ -48,7 +48,7 @@ export default function ProductImage({ isToggle, setIsToggle, id }) {
     uploadImage(event.target.files[0])
       .then((result) =>
         updateAvatar(id, result.data.filename)
-          .then(() => setReload(!reload))
+          .then(() => setReload(Date.now()))
           .catch((error) =>
             NotificationManager.error(
               error.response.data?.message || error.message || "Đã xảy ra lỗi!"
@@ -64,7 +64,7 @@ export default function ProductImage({ isToggle, setIsToggle, id }) {
 
   const onRemoveImage = (id) => {
     removeImage(id)
-      .then(() => setReload(!reload))
+      .then(() => setReload(Date.now()))
       .catch((error) =>
         NotificationManager.error(
           error.response.data?.message || error.message || "Đã xảy ra lỗi!"

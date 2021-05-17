@@ -100,7 +100,7 @@ export default function National() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         } else {
           updateNational(id, { name })
             .then(() => NotificationManager.success(`Sửa thành công!`))
@@ -111,7 +111,7 @@ export default function National() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         }
         setFormDefaultValue(formDefault);
         setIsToggle(false);
@@ -129,7 +129,7 @@ export default function National() {
             error.response.data?.message || error.message || "Đã xảy ra lỗi!"
           )
         )
-        .finally(() => setReload(!reload));
+        .finally(() => setReload(Date.now()));
     }
     setIdForRemove(null);
   };

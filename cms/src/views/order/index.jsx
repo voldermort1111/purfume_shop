@@ -109,7 +109,7 @@ export default function Order() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         }
         setFormDefaultValue(formDefault);
         setIsToggle(false);
@@ -127,7 +127,7 @@ export default function Order() {
             error.response.data?.message || error.message || "Đã xảy ra lỗi!"
           )
         )
-        .finally(() => setReload(!reload));
+        .finally(() => setReload(Date.now()));
     }
     setIdForRemove(null);
   };

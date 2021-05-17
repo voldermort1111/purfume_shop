@@ -129,7 +129,7 @@ export default function Provider() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         } else {
           updateProvider(id, { name, nationalId: +nationalId })
             .then(() => NotificationManager.success(`Sửa thành công!`))
@@ -140,7 +140,7 @@ export default function Provider() {
                   "Đã xảy ra lỗi!"
               )
             )
-            .finally(() => setReload(!reload));
+            .finally(() => setReload(Date.now()));
         }
         setFormDefaultValue(formDefault);
         setIsToggle(false);
@@ -158,7 +158,7 @@ export default function Provider() {
             error.response.data?.message || error.message || "Đã xảy ra lỗi!"
           )
         )
-        .finally(() => setReload(!reload));
+        .finally(() => setReload(Date.now()));
     }
     setIdForRemove(null);
   };
