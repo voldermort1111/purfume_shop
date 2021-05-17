@@ -1,6 +1,6 @@
 import Header from "components/Headers/Header";
 import PerfumePagination from "components/Pagination";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -47,6 +47,7 @@ export default function Product() {
   const [idForRemove, setIdForRemove] = useState(null);
   const [isToggleDelete, setIsToggleDelete] = useState(false);
   const [title, setTitle] = useState("");
+  const ref = useRef(title);
   const [formDefaultValue, setFormDefaultValue] = useState(formDefault);
   const [reload, setReload] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -105,7 +106,7 @@ export default function Product() {
       odorGroupId,
       odorRangeId,
     }) => {
-      if (title === "ADD") {
+      if (ref.current === "ADD") {
         createProduct({
           name,
           code,
@@ -154,8 +155,7 @@ export default function Product() {
       }
       setFormDefaultValue(formDefault);
       setIsToggle(false);
-    },
-    [reload, setReload, products, title]
+    }
   );
 
   const submitRemove = (value) => {
@@ -214,6 +214,7 @@ export default function Product() {
             type="button"
             onClick={() => {
               setTitle("ADD");
+              ref.current = "ADD";
               setFormDefaultValue(formDefault);
               setIsToggle(true);
             }}
@@ -295,6 +296,7 @@ export default function Product() {
                           size="sm"
                           onClick={() => {
                             setTitle("EDIT");
+                            ref.current = "EDIT";
                             setFormDefaultValue({
                               id: _data.id,
                               name: _data.name,
