@@ -41,7 +41,6 @@ export class OrderController {
 	@ApiBearerAuth()
 	@UseGuards(RolesAdminGuard)
 	@RolesAdmin()
-	@GuardPublic()
 	async update(@Param() param: BaseParamDto, @Body() body: OrderUpdateBodyRequestDto) {
 		await this.orderService.update(param.id, body);
 	}

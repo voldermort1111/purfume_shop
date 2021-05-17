@@ -69,6 +69,7 @@ export class ProductRepository extends BaseRepository<Product> {
 		if (excludeIds) {
 			where.id = Not(In(excludeIds));
 		}
+		where.deletedAt = null;
 		where.quantity = MoreThan(0);
 		where.status = EProductStatus.active;
 		return this.find({
@@ -84,7 +85,7 @@ export class ProductRepository extends BaseRepository<Product> {
 		where.quantity = MoreThan(0);
 		where.status = EProductStatus.active;
 		return this.find({
-			where: { id: In(ids), quantity: MoreThan(0), status: EProductStatus.active },
+			where: { id: In(ids), quantity: MoreThan(0), status: EProductStatus.active, deletedAt: null },
 			take: 6,
 			order: { createdAt: 'DESC' },
 			loadEagerRelations: false,
