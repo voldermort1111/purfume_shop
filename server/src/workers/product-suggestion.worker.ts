@@ -114,34 +114,46 @@ export class ProductSuggestionWorker {
 		switch (data.key) {
 			case 'provider': {
 				this.addLabel('providers', data.id, this.KnnProviderData);
-				this.KnnProvider = new KNN(this.KnnProviderData.train, this.KnnProviderData.label, { k: 3 });
+				if (this.KnnProviderData.train.length) {
+					this.KnnProvider = new KNN(this.KnnProviderData.train, this.KnnProviderData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'style': {
 				this.addLabel('styles', data.id, this.KnnStyleData);
-				this.KnnStyle = new KNN(this.KnnStyleData.train, this.KnnStyleData.label, { k: 3 });
+				if (this.KnnStyleData.train.length) {
+					this.KnnStyle = new KNN(this.KnnStyleData.train, this.KnnStyleData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'capacity': {
 				this.addLabel('capacities', data.id, this.KnnCapacityData);
-				this.KnnCapacity = new KNN(this.KnnCapacityData.train, this.KnnCapacityData.label, { k: 3 });
+				if (this.KnnCapacityData.train.length) {
+					this.KnnCapacity = new KNN(this.KnnCapacityData.train, this.KnnCapacityData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'odorGroup': {
 				this.addLabel('groups', data.id, this.KnnGroupData);
-				this.KnnGroup = new KNN(this.KnnGroupData.train, this.KnnGroupData.label, { k: 3 });
+				if (this.KnnGroupData.train.length) {
+					this.KnnGroup = new KNN(this.KnnGroupData.train, this.KnnGroupData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'odorRange': {
 				this.addLabel('ranges', data.id, this.KnnRangeData);
-				this.KnnRange = new KNN(this.KnnRangeData.train, this.KnnRangeData.label, { k: 3 });
+				if (this.KnnRangeData.train.length) {
+					this.KnnRange = new KNN(this.KnnRangeData.train, this.KnnRangeData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'odorRetentionTime': {
 				this.addLabel('retentionTimes', data.id, this.KnnRetentionTimeData);
-				this.KnnRetentionTime = new KNN(this.KnnRetentionTimeData.train, this.KnnRetentionTimeData.label, {
-					k: 3,
-				});
+				if (this.KnnRetentionTimeData.train.length) {
+					this.KnnRetentionTime = new KNN(this.KnnRetentionTimeData.train, this.KnnRetentionTimeData.label, {
+						k: 3,
+					});
+				}
 				break;
 			}
 			default:
@@ -161,40 +173,53 @@ export class ProductSuggestionWorker {
 		for (const iterator of KnnData.train) {
 			iterator.push(0);
 		}
+		console.log(this[storeKey], KnnData);
 	}
 
 	private _handleRemoveLabel(data: IEventDataLabel) {
 		switch (data.key) {
 			case 'provider': {
 				this.removeLabel('providers', data.id, this.KnnProviderData);
-				this.KnnProvider = new KNN(this.KnnProviderData.train, this.KnnProviderData.label, { k: 3 });
+				if (this.KnnProviderData.train.length) {
+					this.KnnProvider = new KNN(this.KnnProviderData.train, this.KnnProviderData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'style': {
 				this.removeLabel('styles', data.id, this.KnnStyleData);
-				this.KnnStyle = new KNN(this.KnnStyleData.train, this.KnnStyleData.label, { k: 3 });
+				if (this.KnnStyleData.train.length) {
+					this.KnnStyle = new KNN(this.KnnStyleData.train, this.KnnStyleData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'capacity': {
 				this.removeLabel('capacities', data.id, this.KnnCapacityData);
-				this.KnnCapacity = new KNN(this.KnnCapacityData.train, this.KnnCapacityData.label, { k: 3 });
+				if (this.KnnCapacityData.train.length) {
+					this.KnnCapacity = new KNN(this.KnnCapacityData.train, this.KnnCapacityData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'odorGroup': {
 				this.removeLabel('groups', data.id, this.KnnGroupData);
-				this.KnnGroup = new KNN(this.KnnGroupData.train, this.KnnGroupData.label, { k: 3 });
+				if (this.KnnGroupData.train.length) {
+					this.KnnGroup = new KNN(this.KnnGroupData.train, this.KnnGroupData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'odorRange': {
 				this.removeLabel('ranges', data.id, this.KnnRangeData);
-				this.KnnRange = new KNN(this.KnnRangeData.train, this.KnnRangeData.label, { k: 3 });
+				if (this.KnnRangeData.train.length) {
+					this.KnnRange = new KNN(this.KnnRangeData.train, this.KnnRangeData.label, { k: 3 });
+				}
 				break;
 			}
 			case 'odorRetentionTime': {
 				this.removeLabel('retentionTimes', data.id, this.KnnRetentionTimeData);
-				this.KnnRetentionTime = new KNN(this.KnnRetentionTimeData.train, this.KnnRetentionTimeData.label, {
-					k: 3,
-				});
+				if (this.KnnRetentionTimeData.train.length) {
+					this.KnnRetentionTime = new KNN(this.KnnRetentionTimeData.train, this.KnnRetentionTimeData.label, {
+						k: 3,
+					});
+				}
 				break;
 			}
 			default:

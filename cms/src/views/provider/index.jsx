@@ -120,7 +120,7 @@ export default function Provider() {
         }
       } else {
         if (title === "ADD") {
-          createProvider({ name })
+          createProvider({ name, nationalId: +nationalId })
             .then(() => NotificationManager.success(`Tạo mới thành công!`))
             .catch((error) =>
               NotificationManager.error(
@@ -131,7 +131,7 @@ export default function Provider() {
             )
             .finally(() => setReload(!reload));
         } else {
-          updateProvider(id, { name })
+          updateProvider(id, { name, nationalId: +nationalId })
             .then(() => NotificationManager.success(`Sửa thành công!`))
             .catch((error) =>
               NotificationManager.error(
