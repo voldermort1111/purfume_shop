@@ -19,6 +19,7 @@ import { PhoneNumberRegex } from '../../shared/utils/regular';
 import { createOrder } from '../../services/order.service';
 import { getInfo } from '../../services/auth.service';
 import { SessionStoreKey } from '../../constants/app.constants';
+import apiConstants from '../../constants/api.constants';
 
 const routes = [
 	{
@@ -357,7 +358,12 @@ export function Cart() {
 								<div className='row' style={{ marginBottom: 20 }}>
 									<div className='col-md-2'>
 										<Link to={getPathProduct(product.id, product.name, product.code)}>
-											<img src='img/jcw2ts.jpg' className='img-responsive' alt='' style={{ width: 150, height: 150 }} />
+											<img
+												src={`${apiConstants.URL_API}/image/${product.avatar}`}
+												className='img-responsive'
+												alt=''
+												style={{ width: 150, height: 150 }}
+											/>
 										</Link>
 									</div>
 									<div className='col-md-5'>
