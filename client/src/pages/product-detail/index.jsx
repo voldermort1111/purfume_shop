@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { ProductItem } from '../../components/product-item';
 import apiConstants from '../../constants/api.constants';
-import { getImagesProduct, getProductByIdAndCode } from '../../services/product.service';
+import { getImagesProduct, getProductByIdAndCode, getProductSimilar } from '../../services/product.service';
+import { currencyFormatter } from '../../shared/utils/format';
 import { ProductDetailComment } from './components/product-detail-comment';
 import { ProductDetailRight } from './components/product-detail-right';
 
@@ -40,6 +41,7 @@ export function ProductDetail() {
 	const history = useHistory();
 	const { code } = useParams();
 	const [product, setProduct] = useState({});
+	const [productsSimilar, setProductsSimilar] = useState([]);
 	const [images, setImages] = useState([]);
 	const params = (code + '').split('__');
 	if (params.length != 3) {
@@ -57,6 +59,18 @@ export function ProductDetail() {
 
 		getImagesProduct(params[params.length - 1]).then(result => setImages(result.data.map(_ => _.value)));
 	}, []);
+
+	useEffect(() => {
+		if (product.id) {
+			getProductSimilar(product.id, product.odorGroupId, product.odorRangeId, product.odorRetentionTimeId).then(
+				result => {
+					if (result.data) {
+						setProductsSimilar(result.data);
+					}
+				},
+			);
+		}
+	}, [product]);
 
 	const productDetailComment = useMemo(() => <ProductDetailComment productId={product.id} />, [product]);
 
@@ -133,30 +147,20 @@ export function ProductDetail() {
 					<h2>Sản phẩm tương tự</h2>
 				</div>
 				<div className='portfolio-items' style={{ paddingLeft: 50 }}>
-					<div className='col-sm-6 col-md-4 col-lg-4 product-item'>
-						<ProductItem
-							name='100 ml Eau De Toilette Spray (#498367)'
-							image='img/jc34edtest.jpg'
-							price='700,000₫'
-							originalPrice='770,405₫'
-						/>
-					</div>
-					<div className='col-sm-6 col-md-4 col-lg-4 product-item' style={{ width: 300 }}>
-						<ProductItem
-							name='60 ml Eau De Toilette Spray (#490865)'
-							image='img/jcw2ts.jpg'
-							price='659,000₫'
-							originalPrice='717,784₫'
-						/>
-					</div>
-					<div className='col-sm-6 col-md-4 col-lg-4 product-item' style={{ width: 300 }}>
-						<ProductItem
-							name='60 ml Eau De Toilette Spray (#490865)'
-							image='img/jcw2ts.jpg'
-							price='659,000₫'
-							originalPrice='717,784₫'
-						/>
-					</div>
+					{productsSimilar.map((_product, index) => (
+						<div className='col-sm-6 col-md-4 col-lg-4 product-item'>
+							<ProductItem
+								id={_product.id}
+								name={_product.name}
+								code={_product.code}
+								quantity={(_product.status === 'ACTIVE' && _product.quantity) || 0}
+								image={`${apiConstants.URL_API}/image/${_product.avatar}`}
+								price={currencyFormatter.format(_product.price)}
+								originalPrice={currencyFormatter.format(_product.originPrice)}
+								key={index}
+							/>
+						</div>
+					))}
 				</div>
 			</div>
 		</div>

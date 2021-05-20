@@ -212,6 +212,32 @@ export class ProductIdsQueryDto {
 	ids: number[];
 }
 
+export class ProductSimilarRequestDto {
+	@ApiProperty()
+	@IsNotEmpty()
+	@IsNumber()
+	@AutoConvertNumber(ProductSimilarRequestDto)
+	id: number;
+
+	@ApiProperty()
+	@IsNotEmpty()
+	@IsNumber()
+	@AutoConvertNumber(ProductSimilarRequestDto)
+	groupId: number;
+
+	@ApiProperty()
+	@IsNotEmpty()
+	@IsNumber()
+	@AutoConvertNumber(ProductSimilarRequestDto)
+	rangeId: number;
+
+	@ApiProperty()
+	@IsNotEmpty()
+	@IsNumber()
+	@AutoConvertNumber(ProductSimilarRequestDto)
+	retentionTimeId: number;
+}
+
 export class ProductCodeQueryDto {
 	@ApiProperty()
 	@IsNotEmpty()

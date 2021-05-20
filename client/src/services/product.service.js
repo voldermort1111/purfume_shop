@@ -32,3 +32,7 @@ export function getProductSuggesttion() {
 		`/suggestion`,
 	);
 }
+
+export function getProductSimilar(id, groupId, rangeId, retentionTimeId) {
+	return axiosBase.get(`${url}/similar`, { params: { id, groupId, rangeId, retentionTimeId } });
+}

@@ -27,6 +27,7 @@ export class OrderService {
 			phoneNumber: data.phoneNumber,
 			address: data.address,
 			note: data.note || null,
+			userId: data.userId || null,
 		});
 		const orderProducts = [] as OrderProduct[];
 		if (products && products.length) {

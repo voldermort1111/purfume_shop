@@ -5,6 +5,7 @@ import { httpConflict } from '@shared/exceptions/http-exception';
 import { ProductBodyRequestDto } from './dto/product.dto';
 import { IFindProductWhereOptions, ProductRepository } from './product.repository';
 import { unlink } from 'fs';
+import { Equal, Not } from 'typeorm';
 
 @Injectable()
 export class ProductService {
@@ -28,6 +29,10 @@ export class ProductService {
 
 	findByIds(ids: number[]) {
 		return this.productRepository.findByIds(ids, { loadEagerRelations: false });
+	}
+
+	async getSimilar(id: number, groupId: number, rangeId: number, retentionTimeId: number) {
+		return this.productRepository.getSimilar(id, groupId, rangeId, retentionTimeId);
 	}
 
 	updateQuantity(id: number, quantity: number) {

@@ -13,6 +13,5 @@ export function updateQuantityCart(payload) {
 }
 
 export function clearCartStore() {
-	console.log('zzzz');
 	return { type: CartReduxAction.clearCart };
 }

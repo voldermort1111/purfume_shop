@@ -91,4 +91,16 @@ export class ProductRepository extends BaseRepository<Product> {
 			loadEagerRelations: false,
 		});
 	}
+
+	async getSimilar(id: number, groupId: number, rangeId: number, retentionTimeId: number) {
+		const queryBuilder = await this.createQueryBuilder('products');
+		queryBuilder.where(`products.id != :id`, { id });
+		queryBuilder.andWhere(
+			`products.odorGroupId = :groupId OR products.odorRangeId = :rangeId OR products.odorRetentionTimeId = :retentionTimeId`,
+			{ groupId, rangeId, retentionTimeId },
+		);
+		queryBuilder.orderBy('RAND()');
+		queryBuilder.limit(3);
+		return queryBuilder.getMany();
+	}
 }

@@ -7,6 +7,7 @@ import {
 	ProductDtoRequest,
 	ProductIdsQueryDto,
 	ProductResponseDto,
+	ProductSimilarRequestDto,
 	ProductUpdateRequestDto,
 } from './data-access/dto/product.dto';
 import { GuardPublic, RolesAdmin } from '../../guard/guard.decorator';
@@ -49,6 +50,14 @@ export class ProductController {
 	@UsePipes(new ConvertHttpQueryPipe(ProductIdsQueryDto))
 	getByListId(@Query() query: ProductIdsQueryDto) {
 		return this.productService.findByIds(query.ids);
+	}
+
+	@Get('similar')
+	@GuardPublic()
+	@UsePipes(ValidationQueryPipe)
+	@UsePipes(new ConvertHttpQueryPipe(ProductSimilarRequestDto))
+	similar(@Query() query: ProductSimilarRequestDto) {
+		return this.productService.getSimilar(query.id, query.groupId, query.rangeId, query.retentionTimeId);
 	}
 
 	@Get(':id')

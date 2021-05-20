@@ -8,6 +8,7 @@ import { login } from '../../services/auth.service';
 import { hasChangeAuth } from './../../redux/actions/auth.action';
 import { useDispatch } from 'react-redux';
 import { SessionStoreKey } from '../../constants/app.constants';
+import { clearCartStore } from '../../redux/actions/cart.action';
 
 const LoginValidateSchema = Yup.object().shape({
 	email: Yup.string().email('Không đúng định dạng email').required('Không được bỏ trống'),
@@ -27,6 +28,7 @@ export function Login() {
 			.then(result => {
 				sessionStorage.setItem(SessionStoreKey.ACCESS_TOKEN, result.data.accessToken);
 				dispatch(hasChangeAuth(result.data.accessToken));
+				dispatch(clearCartStore());
 				history.push('/');
 			})
 			.catch(error =>

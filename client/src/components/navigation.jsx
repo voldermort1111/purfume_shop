@@ -7,6 +7,7 @@ import { Link, NavLink, useHistory } from 'react-router-dom';
 import { RoutersMain } from '../router';
 import { SessionStoreKey } from './../constants/app.constants';
 import { hasChangeAuth } from '../redux/actions/auth.action';
+import { clearCartStore } from '../redux/actions/cart.action';
 
 const MenuAccount = ({ logout }) => (
 	<Menu>
@@ -33,6 +34,7 @@ export const Navigation = () => {
 	const logout = () => {
 		sessionStorage.removeItem(SessionStoreKey.ACCESS_TOKEN);
 		dispatch(hasChangeAuth(null));
+		dispatch(clearCartStore());
 	};
 
 	const onSearch = value => {

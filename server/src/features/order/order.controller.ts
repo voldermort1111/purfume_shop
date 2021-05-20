@@ -1,6 +1,6 @@
 import { OrderBodyDto, OrderDtoRequest, OrderUpdateBodyRequestDto } from './data-access/dto/order.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Request, UseGuards, UsePipes } from '@nestjs/common';
 import { GuardPublic, RolesAdmin } from '../../guard/guard.decorator';
 import { OrderService } from './data-access/order.service';
 import { ValidationQueryPipe } from '@shared/pipes/validation.pipe';
@@ -32,6 +32,13 @@ export class OrderController {
 	@Post()
 	@GuardPublic()
 	async post(@Body() body: OrderBodyDto) {
+		await this.orderService.createOrder(body);
+	}
+
+	@Post('has-auth')
+	@ApiBearerAuth()
+	async postHasAuth(@Body() body: OrderBodyDto, @Request() req) {
+		body.userId = req?.user?.userId;
 		await this.orderService.createOrder(body);
 	}
 
